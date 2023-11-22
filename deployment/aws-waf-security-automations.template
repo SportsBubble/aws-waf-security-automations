@@ -188,7 +188,7 @@ Metadata:
 Parameters:
   ActivateAWSManagedRulesParam:
     Type: String
-    Default: 'no'
+    Default: 'yes'
     AllowedValues:
       - 'yes'
       - 'no'
@@ -212,7 +212,7 @@ Parameters:
 
   ActivateAWSManagedKBIParam:
     Type: String
-    Default: 'no'
+    Default: 'yes'
     AllowedValues:
       - 'yes'
       - 'no'
@@ -223,7 +223,7 @@ Parameters:
 
   ActivateAWSManagedIPRParam:
     Type: String
-    Default: 'no'
+    Default: 'yes'
     AllowedValues:
       - 'yes'
       - 'no'
@@ -235,7 +235,7 @@ Parameters:
 
   ActivateAWSManagedAIPParam:
     Type: String
-    Default: 'no'
+    Default: 'yes'
     AllowedValues:
       - 'yes'
       - 'no'
@@ -273,7 +273,7 @@ Parameters:
 
   ActivateAWSManagedPOSIXParam:
     Type: String
-    Default: 'no'
+    Default: 'yes'
     AllowedValues:
       - 'yes'
       - 'no'
@@ -323,7 +323,7 @@ Parameters:
 
   ActivateSqlInjectionProtectionParam:
     Type: String
-    Default: 'yes'
+    Default: 'no'
     AllowedValues:
       - 'yes'
       - 'yes - MATCH'
@@ -349,7 +349,7 @@ Parameters:
 
   ActivateCrossSiteScriptingProtectionParam:
     Type: String
-    Default: 'yes'
+    Default: 'no'
     AllowedValues:
       - 'yes'
       - 'yes - MATCH'
@@ -417,7 +417,7 @@ Parameters:
 
   AppAccessLogBucket:
     Type: String
-    Default: ''
+    Default: 'sb-aws-waf-security-automations-cloudfront-access-logs-sb5'
     AllowedPattern: '(^$|^([a-z]|(\d(?!\d{0,2}\.\d{1,3}\.\d{1,3}\.\d{1,3})))([a-z\d]|(\.(?!(\.|-)))|(-(?!\.))){1,61}[a-z\d]$)'
     Description: >-
       If you chose yes for the Activate Scanners & Probes Protection parameter, enter a name for the 
@@ -560,7 +560,7 @@ Parameters:
 
   LogGroupRetentionParam:
     Type: Number
-    Default: 365
+    Default: 30
     AllowedValues:
       - -1
       - 1
@@ -2707,10 +2707,10 @@ Resources:
             - !Ref AWS::AccountId
             - !Ref AWS::StackName
       Tags: {
-      'Solutions:SolutionID': !FindInMap [Solution, Data, "SolutionID"],
-      'Solutions:SolutionVersion': "%VERSION%",
-      'Solutions:SolutionName': !FindInMap [Solution, AppRegistry, "SolutionName"],
-      'Solutions:ApplicationType': 'AWS-Solutions', 
+        'Solutions:SolutionID': !FindInMap [Solution, Data, "SolutionID"],
+        'Solutions:SolutionVersion': "%VERSION%",
+        'Solutions:SolutionName': !FindInMap [Solution, AppRegistry, "SolutionName"],
+        'Solutions:ApplicationType': 'AWS-Solutions', 
       }
 
   AppRegistryApplicationStackAssociation:
