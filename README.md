@@ -125,8 +125,9 @@ chmod +x ./build-s3-dist.sh && ./build-s3-dist.sh $TEMPLATE_OUTPUT_BUCKET $DIST_
 ## Upload deployment assets
 
 ```
+cd .. # Get back to the <rootDir> otherwise the following commands will fail
 aws s3 cp ./deployment/global-s3-assets s3://$TEMPLATE_OUTPUT_BUCKET/$SOLUTION_NAME/$VERSION --recursive --acl bucket-owner-full-control
-aws s3 cp ./deployment/regional-s3-assets s3://$DIST_OUTPUT_BUCKET-$AWS_REGION/$SOLUTION_NAME/$VERSION --recursive --acl bucket-owner-full-control
+aws s3 cp ./deployment/regional-s3-assets s3://$DIST_OUTPUT_BUCKET/$SOLUTION_NAME/$VERSION --recursive --acl bucket-owner-full-control
 ```
 
 **Note:** You must use a proper ACL and profile for the copy operation as applicable. Using randomized bucket names is recommended.
@@ -135,8 +136,8 @@ aws s3 cp ./deployment/regional-s3-assets s3://$DIST_OUTPUT_BUCKET-$AWS_REGION/$
 
 ## Deploy
 
-- From your designated S3 bucket where you uploaded the deployment assets, copy the link location for the `aws-waf-security-automations.template` file.
-- Using AWS CloudFormation, launch the Security Automations for AWS WAF solution stack using the copied Amazon S3 link for the `aws-waf-security-automations.template` file.
+- From your designated S3 bucket where you uploaded the deployment assets, copy the Object URL for the `aws-waf-security-automations.template` file. The location will be in the format: 'https://<YOUR_TEMPLATE_OUTPUT_BUCKET>.s3.amazonaws.com/aws-waf-security-automations/<VERSION>/aws-waf-security-automations.template'.
+- Using AWS CloudFormation, launch the Security Automations for AWS WAF solution stack using the copied Amazon S3 Object URL for the `aws-waf-security-automations.template` file.
 
 **Note:** When deploying the template for your CloudFront endpoint, you can launch it only from the `us-east-1` Region.
 
